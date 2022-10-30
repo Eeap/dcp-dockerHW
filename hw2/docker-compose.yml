@@ -1,0 +1,9 @@
+services:
+  server:
+    image: eeap/server:v1
+    ports:
+      - "12345:12345"
+  client:
+    depends_on:
+      - server
+    image: eeap/client:v1
