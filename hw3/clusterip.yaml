@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  type: ClusterIP
+  ports:
+  - name: myservice
+    port: 12340
+    targetPort: 12345
+  selector:
+    app: socket
+    tier: server

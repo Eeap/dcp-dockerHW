@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-deployment-client
+  labels:
+    app: socket-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket
+      tier: client
+  template:
+    metadata:
+      labels:
+        app: socket
+        tier: client
+    spec:
+      containers:
+      - name: socket-client
+        image: eeap/clients:v3
+        ports:
+        - containerPort: 12123
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-deployment-server
+  labels:
+    app: socket-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket
+      tier: server
+  template:
+    metadata:
+      labels:
+        app: socket
+        tier: server
+    spec:
+      containers:
+      - name: socket-server
+        image: eeap/servers:v4
+        ports:
+        - containerPort: 12340
